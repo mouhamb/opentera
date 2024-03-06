@@ -74,6 +74,13 @@ class TeraUserClient:
         backend_response = get(url=self.__backend_url + path, headers=request_headers, verify=False)
         return backend_response
 
+    def do_delete_request_to_backend(self, path: str) -> Response:
+        from requests import delete
+        request_headers = {'Authorization': 'OpenTera ' + self.__user_token}
+        # TODO: remove verify=False and check certificate
+        backend_response = delete(url=self.__backend_url + path, headers=request_headers, verify=False)
+        return backend_response
+
     def get_roles_for_service(self, service_key: str) -> List[str]:
         # Roles are stored in the token, in the service_access dictionary
         roles: List[str] = []
